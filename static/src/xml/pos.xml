@@ -1,25 +1,27 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<template>
-    <t t-name="Product">
-        <span class='product' t-att-data-product-id="product.id">
-            <div class="product-img">
-                <img t-att-src='image_url' />
-                <t t-if="!product.to_weight">
-                    <span class="price-tag">
-                        <t t-esc="widget.format_currency(product.get_price(pricelist, 1),'Product Price')"/>
-                    </span>
-                </t>
-                <t t-if="product.to_weight">
-                    <span class="price-tag">
-                        <t t-esc="widget.format_currency(product.get_price(pricelist, 1),'Product Price')+'/'+widget.pos.units_by_id[product.uom_id[0]].name"/>
-                    </span>
-                </t>
-            </div>
-            <div class="product-name">
-                <t t-esc="product.display_name"/>
-                <t t-if="product.vintage_id" t-esc="product.vintage_id.name"/>
-                <t t-esc="product.color"/>
-            </div>
-        </span>
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="point_of_sale.template" xml:space="preserve">
+    <t t-extend="Product">
+        <t t-jquery='.product' t-operation='replace'>
+            <span class='product' t-att-data-product-id="product.id">
+                <div class="product-img">
+                    <img t-att-src='image_url' />
+                    <t t-if="!product.to_weight">
+                        <span class="price-tag">
+                            <t t-esc="widget.format_currency(product.get_price(pricelist, 1),'Product Price')"/>
+                        </span>
+                    </t>
+                    <t t-if="product.to_weight">
+                        <span class="price-tag">
+                            <t t-esc="widget.format_currency(product.get_price(pricelist, 1),'Product Price')+'/'+widget.pos.units_by_id[product.uom_id[0]].name"/>
+                        </span>
+                    </t>
+                </div>
+                <div class="product-name">
+                    <t t-esc="product.display_name"/>
+                    <t t-if="product.vintage_id" t-esc="product.vintage_id.name"/>
+                    <t t-esc="product.color"/>
+                </div>
+            </span>
+        </t>
     </t>
-</template>
+</templates>
